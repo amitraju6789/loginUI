@@ -19,6 +19,7 @@ function App() {
   const [isSignup, setIsSignup] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
   const [error, setError] = useState("");
 
   useEffect(() => {
@@ -30,6 +31,10 @@ function App() {
 
   const handleSignup = async (e) => {
     e.preventDefault();
+    if (password !== confirmPassword) {
+      setError("Passwords do not match!");
+      return;
+    }
     try {
       await createUserWithEmailAndPassword(auth, email, password);
       setError("");
@@ -155,8 +160,8 @@ function App() {
     return (
       <div className="App">
         <canvas ref={canvasRef} id="starfield"></canvas>
-        <div className="auth-overlay">
-          <h2>{isSignup ? "Signup" : "Login"}</h2>
+        <div className="auth-container">
+          <h2 className="auth-title">{isSignup ? "Sign Up" : "Login"}</h2>
           <form onSubmit={isSignup ? handleSignup : handleLogin}>
             <input
               type="email"
@@ -172,21 +177,33 @@ function App() {
               onChange={(e) => setPassword(e.target.value)}
               required
             />
-            <button type="submit">{isSignup ? "Signup" : "Login"}</button>
+            {isSignup && (
+              <input
+                type="password"
+                placeholder="Confirm Password"
+                value={confirmPassword}
+                onChange={(e) => setConfirmPassword(e.target.value)}
+                required
+              />
+            )}
+            <button type="submit" className="login-btn">
+              {isSignup ? "Sign Up" : "Login"}
+            </button>
           </form>
 
-          <div style={{ marginTop: 10 }}>
-            <button onClick={handleGoogle} className="google-btn">
-              Continue with Google
-            </button>
-          </div>
+          <div className="divider">or</div>
+
+          <button onClick={handleGoogle} className="google-auth-btn">
+            {/* You can add your Google SVG/logo here */}
+            Continue with Google
+          </button>
 
           {error && <p className="error">{error}</p>}
 
-          <p className="switch" onClick={() => setIsSignup(!isSignup)}>
+          <p className="signup-switch" onClick={() => setIsSignup(!isSignup)}>
             {isSignup
               ? "Already have an account? Login"
-              : "Don't have an account? Signup"}
+              : "Don't have an account? Sign up"}
           </p>
         </div>
       </div>
@@ -206,7 +223,6 @@ function App() {
       <div className="center-content">
         <div className="logo-container">
           <img ref={logoRef} src={logo} alt="Logo" className="logo-3d" />
-          <div className="shadow"></div>
         </div>
         <h1 ref={textRef} className="glow-text">
           Welcome, {user.email}
