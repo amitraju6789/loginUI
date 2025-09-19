@@ -8,6 +8,7 @@ html, body, #root, .App {
   font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
   color: #fff;
   overflow: hidden;
+  box-sizing: border-box;
 }
 
 /* Starfield background */
@@ -28,7 +29,8 @@ html, body, #root, .App {
   border-radius: 12px;
   text-align: center;
   z-index: 3;
-  min-width: 360px;
+  width: 100%;
+  max-width: 360px;  
   box-shadow: 0 6px 30px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(255,255,255,0.02);
 }
 
@@ -42,14 +44,15 @@ html, body, #root, .App {
 /* Inputs */
 .auth-container input {
   display: block;
-  margin: 10px auto;
+  margin: 10px 0;
   padding: 12px 14px;
-  width: 360px;
+  width: 100%;             
   border-radius: 80px;
   border: 1px solid rgba(255, 255, 255, 0.1);
   background: rgba(255, 255, 255, 0.02);
   color: #fff;
-  transition: 0.25s ease;
+  transition: border-color 0.25s ease, box-shadow 0.25s ease, background 0.25s ease;
+  box-sizing: border-box;  
 }
 .auth-container input:focus {
   border-color: #00e0ff;
@@ -62,7 +65,7 @@ html, body, #root, .App {
 .login-btn {
   margin-top: 12px;
   padding: 12px 14px;
-  width: 100%;
+  width: 100%;             
   border-radius: 80px;
   border: 1px solid rgba(255, 255, 255, 0.06);
   background: rgba(255, 255, 255, 0.02);
@@ -72,10 +75,8 @@ html, body, #root, .App {
   cursor: pointer;
   transition: all 0.3s ease;
   backdrop-filter: blur(2px);
+  box-sizing: border-box; 
 }
-
-
-
 .login-btn:hover {
   background: rgba(0, 224, 255, 0.1);
   box-shadow: 0 0 5px rgba(0, 224, 255, 0.3);
@@ -96,7 +97,7 @@ html, body, #root, .App {
   justify-content: center;
   gap: 8px;
   padding: 12px 14px;
-  width: 100%;
+  width: 100%;             
   border-radius: 80px;
   border: 1px solid rgba(255, 255, 255, 0.06);
   background: rgba(255, 255, 255, 0.02);
@@ -106,11 +107,12 @@ html, body, #root, .App {
   font-size: 15px;
   transition: all 0.3s ease;
   backdrop-filter: blur(2px);
+  box-sizing: border-box;
 }
 .google-auth-btn:hover {
   background: rgba(0, 224, 255, 0.1);
   box-shadow: 0 0 5px rgba(0, 224, 255, 0.3);
-  border-color: rgba(0, 224, 255, 0.3); 
+  border-color: rgba(0, 224, 255, 0.3);
 }
 
 .google-logo {
